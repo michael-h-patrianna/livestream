@@ -139,7 +139,7 @@ function App() {
         ></iframe>
       </div>
 
-      <h2>Live Stream Player</h2>
+      <h2>React RTMP Player</h2>
       <div style={{ width: '100%', maxWidth: '960px', margin: '0 auto' }}>
         <Stream
           controls
