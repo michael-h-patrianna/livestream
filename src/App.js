@@ -12,7 +12,7 @@ function App() {
 
     // WebRTC implementation
     const WHEPURL = process.env.REACT_APP_STREAM_WEBRTC_PLAYBACK_URL;
-
+   
     class WHEPClient {
       constructor(endpoint, videoElement) {
         this.endpoint = endpoint;
@@ -112,8 +112,10 @@ function App() {
     }
   }, []);
 
+  // RTMP
   const videoIdOrSignedToken = process.env.REACT_APP_STREAM_RTMP_LIVE_INPUT_ID;
   const iframeURL = "https://customer-" + process.env.REACT_APP_STREAM_CUSTOMER_ID + ".cloudflarestream.com/" + process.env.REACT_APP_STREAM_RTMP_LIVE_INPUT_ID + "/iframe";
+ const placeholderImageUrl = "https://via.placeholder.com/960x540.png?text=Stream+Not+Started";
 
   if (!videoIdOrSignedToken) {
     return <div className="App">Error: Stream Playback Key not found in environment variables.</div>;
@@ -146,6 +148,7 @@ function App() {
           src={videoIdOrSignedToken}
           responsive={true}
           aspectRatio="16:9"
+          poster={placeholderImageUrl}
         />
       </div>
 
