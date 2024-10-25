@@ -19,12 +19,26 @@ function App() {
         this.videoElement = videoElement;
         this.stream = new MediaStream();
         this.peerConnection = new RTCPeerConnection({
-          iceServers: [{ urls: "stun:stun.cloudflare.com:3478" }],
+          iceServers: [
+            { urls: "stun:stun.l.google.com:19302" },
+            { urls: "stun:stun1.l.google.com:19302" },
+            { urls: "stun:stun2.l.google.com:19302" },
+            { urls: "stun:stun3.l.google.com:19302" },
+            { urls: "stun:stun4.l.google.com:19302" }
+            
+          ],
           bundlePolicy: "max-bundle",
+          iceCandidatePoolSize: 1
         });
 
         this.peerConnection.addTransceiver("video", { direction: "recvonly" });
         this.peerConnection.addTransceiver("audio", { direction: "recvonly" });
+
+        window.addEventListener('beforeunload', () => {
+          if (this.peerConnection) {
+            this.peerConnection.close();
+          }
+        });
 
         this.peerConnection.ontrack = (event) => {
           const track = event.track;
